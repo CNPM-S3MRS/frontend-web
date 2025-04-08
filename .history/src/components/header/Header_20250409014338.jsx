@@ -1,0 +1,38 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+import LogoBK from "../../assets/LogoBK.jpg"; // Adjust the path as necessary
+
+const Header = () => {
+  const menuItems = [
+    { name: "Đăng nhập", path: "/login" },
+    { name: "Đăng ký", path: "/register" },
+  ];
+
+  return (
+    <header className="flex items-center py-2 justify-between bg-gray-800 text-white">
+      {/* Logo */}
+      <img src={LogoBK} alt="Logo" className="w-16 h-16 object-contain" />
+
+      {/* Navigation */}
+      <nav>
+        <ul className="flex space-x-4">
+          {menuItems.map((item) => (
+            <li key={item.name}>
+              <NavLink
+                to={item.path}
+                className={({ isActive }) =>
+                  `hover:text-gray-400 ${isActive ? "text-gray-400 font-bold" : ""}`
+                }
+                aria-label={item.name}
+              >
+                {item.name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;

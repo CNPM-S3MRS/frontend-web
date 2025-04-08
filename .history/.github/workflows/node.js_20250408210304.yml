@@ -1,0 +1,47 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: CI Deloy FE WEB
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x] #chạy test trên Node 18
+        
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build project
+      run: npm run build --if-present
+
+    - name: Run tests
+      run: npm test
+
+    - name: Deploy to Vercel  # Triển khai sau khi build & test thành công
+      if: success()  # Chỉ chạy nếu bước trước thành công
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.CoPxZ5CvI5pv961UZXJgdGgC}}
+        vercel-project-id: ${{ secrets.prj_5PxBxVyfx1XohSoWtTw3DPxlBzhy }}
+        vercel-args: '--prod'
