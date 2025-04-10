@@ -29,7 +29,6 @@ const Notification = () => {
           className={`flex-grow p-4 transition-all duration-300 ${
             isSidebarOpen ? "lg:pl-80" : "pl-4"
           }`}
-          style={{ overflow: "visible" }}
         >
           <h1 className="text-2xl font-bold mb-4">Notification</h1>
           {/* Dropdowns */}

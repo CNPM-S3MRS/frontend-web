@@ -9,10 +9,6 @@ import DropdownList from "../../components/dropdownmenu/DropdownList";
 const Notification = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar is visible by default
   const [currentPage, setCurrentPage] = useState(1);
-  const handleDropdownSelect = (item) => {
-    console.log("Selected:", item);
-  };
-
 
   return (
     <div className="container flex flex-col h-screen">
@@ -23,28 +19,15 @@ const Notification = () => {
       <div className="flex flex-grow">
         {/* Sidebar */}
         <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
-        
+        {/* Dropdown List */}
+
         {/* Main Content */}
         <div
           className={`flex-grow p-4 transition-all duration-300 ${
             isSidebarOpen ? "lg:pl-80" : "pl-4"
           }`}
-          style={{ overflow: "visible" }}
         >
           <h1 className="text-2xl font-bold mb-4">Notification</h1>
-          {/* Dropdowns */}
-          <div className="flex justify-between mb-4">
-            <DropdownList
-              label="Mark as read"
-              items={["Mark as read", "Mark as unread"]}
-              onSelect={handleDropdownSelect}
-            />
-            <DropdownList
-              label="All"
-              items={["All", "Read", "Unread"]}
-              onSelect={handleDropdownSelect}
-            />
-          </div>
 
           {/* Notification Cards */}
           <div className="space-y-4">

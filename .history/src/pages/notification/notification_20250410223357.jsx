@@ -29,11 +29,10 @@ const Notification = () => {
           className={`flex-grow p-4 transition-all duration-300 ${
             isSidebarOpen ? "lg:pl-80" : "pl-4"
           }`}
-          style={{ overflow: "visible" }}
         >
           <h1 className="text-2xl font-bold mb-4">Notification</h1>
           {/* Dropdowns */}
-          <div className="flex justify-between mb-4">
+          <div className="flex mb-4">
             <DropdownList
               label="Mark as read"
               items={["Mark as read", "Mark as unread"]}

@@ -33,18 +33,18 @@ const Notification = () => {
         >
           <h1 className="text-2xl font-bold mb-4">Notification</h1>
           {/* Dropdowns */}
-          <div className="flex justify-between mb-4">
-            <DropdownList
-              label="Mark as read"
-              items={["Mark as read", "Mark as unread"]}
-              onSelect={handleDropdownSelect}
-            />
-            <DropdownList
-              label="All"
-              items={["All", "Read", "Unread"]}
-              onSelect={handleDropdownSelect}
-            />
-          </div>
+  <div className="flex justify-between mb-4">
+    <DropdownList
+      label="Mark as read"
+      items={["Mark as read", "Mark as unread"]}
+      onSelect={handleDropdownSelect}
+    />
+    <DropdownList
+      label="All"
+      items={["All", "Read", "Unread"]}
+      onSelect={handleDropdownSelect}
+    />
+  </div>
 
           {/* Notification Cards */}
           <div className="space-y-4">
