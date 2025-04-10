@@ -8,7 +8,12 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/homepage" element={<Homepage />} />
+        import { Navigate } from "react-router-dom";
+
+        <Routes>
+          <Route path="/" element={<Navigate to="/homepage" />} />
+          <Route path="/homepage" element={<Homepage />} />
+        </Routes>
         <Route path="/notification" element={<Notification />} /> {/* Add this route */}
         <Route path="/" element={<div>Trang chủ</div>} />
       </Routes>

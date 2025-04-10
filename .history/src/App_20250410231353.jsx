@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/homepage" element={<Homepage />} />
+        
         <Route path="/notification" element={<Notification />} /> {/* Add this route */}
         <Route path="/" element={<div>Trang chủ</div>} />
       </Routes>
