@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from '@/pages/auth/Login';
 import Notification from './pages/notification/notification';
 import Homepage from "./pages/homepage/Homepage";
-import Forgot from "./pages/forgotpwd/Forgot";
+import Forgot from
 
 function App() {
   return (
@@ -11,7 +11,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/notification" element={<Notification />} /> {/* Add this route */}
-        <Route path="/forgotpwd" element={<Forgot />} /> {/* Add this route */}
         <Route path="/" element={<div>Trang chủ</div>} />
       </Routes>
     </Router>
