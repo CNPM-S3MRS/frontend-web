@@ -28,23 +28,23 @@ const Homepage = () => {
             isSidebarOpen ? "lg:pl-80" : "pl-4"
           }`}
         >
-          <h1 className="text-2xl font-bold mb-4">Homepage</h1>
+          <h1 className="text-2xl font-bold mb-4"></h1>
           {/* Display Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <DisplayCard
-              image="https://via.placeholder.com/150"
+              image="h1.jpg"
               status="Hiến máu nhân đạo"
               statusColor="red"
               message="Hiến máu nhân đạo"
             />
             <DisplayCard
-              image="https://via.placeholder.com/150"
+              image="h2.jpeg"
               status="Hướng dẫn sử dụng"
               statusColor="blue"
               message="Hướng dẫn sử dụng"
             />
             <DisplayCard
-              image="https://via.placeholder.com/150"
+              image="h3.webp"
               status="Cập nhật"
               statusColor="green"
               message="Cập nhật"

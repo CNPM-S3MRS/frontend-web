@@ -14,7 +14,7 @@ const Notification = () => {
   };
 
   return (
-    <div className="container flex flex-col h-screen">
+    <div className="container flex flex-col h-screen bg-white rounded shadow">
       {/* Header */}
       
       <Header isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
@@ -30,7 +30,7 @@ const Notification = () => {
           }`}
           style={{ overflow: "visible" }}
         >
-          <h1 className="text-2xl font-bold mb-4">Notification</h1>
+          <h1 className="text-2xl font-bold mb-4 "></h1>
           {/* Dropdowns */}
           <div className="flex justify-between mb-4">
             <DropdownList
@@ -46,15 +46,15 @@ const Notification = () => {
           </div>
 
           {/* Notification Cards */}
-          <div className="space-y-4">
+          <div className="space-y-4 ">
             <NotificationCard
-              image="https://via.placeholder.com/150"
+              image="room-bg.png"
               status="Upcoming event"
               statusColor="green"
               message="You have class at H3-106 at 1:00 PM on March 28"
             />
             <NotificationCard
-              image="https://via.placeholder.com/150"
+              image="room-bg.png"
               status="Next week"
               statusColor="blue"
               message="You have class at H2-106 at 3:00 PM on April 4"
