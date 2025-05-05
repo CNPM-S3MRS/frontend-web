@@ -1,43 +1,60 @@
 import React, { useState } from "react";
-import ForgotPassword from "../../components/form/ForgotPassword";
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
-import Sidebar from "../../components/bars/Sidebar";
-import BKbg from "../../assets/bk-bg.jpg"; // Import your background image
 
-const Forgot = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    if (!email) {
+      setError("Vui lòng nhập email.");
+      return;
+    }
+
+    // 👇 Logic gửi email reset giả lập
+    setSubmitted(true);
+    setError("");
+  };
 
   return (
-    <div
-      className="flex flex-col min-h-screen bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${BKbg})`,
-      }}
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      style={{ backgroundImage: "url('/bk-bg.jpg')" }}
     >
-      {/* Header */}
-      <Header isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+      <div className="bg-white bg-opacity-95 rounded-lg shadow-xl p-6 w-full max-w-md">
+        <h2 className="text-xl font-bold mb-2">Quên mật khẩu</h2>
+        <p className="text-sm text-gray-600 mb-4">
+          Vui lòng nhập địa chỉ email để nhận liên kết đặt lại mật khẩu.
+        </p>
 
-      <div className="flex flex-grow">
-        {/* Sidebar */}
-        <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
-
-        {/* Main Content */}
-        <div
-          className={`flex-grow p-4 transition-all duration-300 ${
-            isSidebarOpen ? "lg:pl-80" : "pl-4"
-          }`}
-        >
-          {/* Forgot Password Form */}
-          <div className="flex flex-col items-center justify-center h-full">
-            <ForgotPassword />
+        {!submitted ? (
+          <form onSubmit={handleReset} className="space-y-4">
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+            <input
+              type="email"
+              placeholder="Email của bạn"
+              className="w-full p-3 border rounded bg-white text-black placeholder-gray-500"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <div className="flex justify-end gap-2">
+              <button type="button" onClick={() => setEmail("")} className="px-3 py-1 bg-gray-200 rounded">
+                Hủy
+              </button>
+              <button type="submit" className="px-3 py-1 bg-blue-600 text-white rounded">
+                Đặt lại mật khẩu
+              </button>
+            </div>
+          </form>
+        ) : (
+          <div className="text-green-600 text-sm">
+            ✔️ Liên kết đặt lại mật khẩu đã được gửi đến email của bạn!
           </div>
-        </div>
+        )}
       </div>
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };
 
-export default Forgot;
+export default ForgotPassword;
