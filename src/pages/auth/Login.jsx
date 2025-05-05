@@ -1,46 +1,43 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { authAPI } from "../../api"; 
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [showPwd, setShowPwd] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !password || !fullName) {
-      setError("Vui lòng nhập đầy đủ thông tin.");
+    if (!email || !password) {
+      setError("Vui lòng nhập đầy đủ email và mật khẩu.");
       return;
     }
-    // Giả lập đăng nhập
-    localStorage.setItem("user", JSON.stringify({ email, fullName }));
-    navigate("/homepage");
+
+    try {
+      const res = await authAPI.studentLogin(email, password);
+      if (res.token) {
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("user", JSON.stringify(res.user));
+        navigate("/homepage"); // Đảm bảo route này tồn tại
+      } else {
+        setError("Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.");
+      }
+    } catch (err) {
+      setError("Lỗi khi đăng nhập. Vui lòng thử lại.");
+    }
   };
 
   return (
-    <div
-      className="flex min-h-screen items-center justify-center bg-cover bg-center"
-      style={{
-        backgroundImage: `url('/bk-bg.jpg')`, // đổi thành ảnh trường BK bạn đang dùng
-      }}
-    >
+    <div className="flex min-h-screen items-center justify-center bg-cover bg-center" style={{ backgroundImage: `url('/bk-bg.jpg')` }}>
       <div className="w-full max-w-md bg-white bg-opacity-90 rounded-lg p-8 shadow-xl">
         <h2 className="text-2xl font-bold text-center mb-6">Đăng nhập</h2>
-
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            placeholder="Họ và tên"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className="w-full p-3 border rounded bg-white text-black placeholder-gray-500"
-          />
           <input
             type="email"
             placeholder="Địa chỉ email"

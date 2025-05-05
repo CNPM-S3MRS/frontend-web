@@ -1,24 +1,30 @@
 import React, { useState } from "react";
+import { authAPI } from "../../api";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  const handleReset = (e) => {
+  const handleReset = async (e) => {
     e.preventDefault();
     if (!email) {
       setError("Vui lòng nhập email.");
       return;
     }
 
-    // 👇 Logic gửi email reset giả lập
-    setSubmitted(true);
-    setError("");
+    try {
+      await authAPI.forgotPassword(email);
+      setSubmitted(true);
+      setError("");
+    } catch (err) {
+      setError("Không thể gửi email đặt lại mật khẩu. Vui lòng thử lại.");
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-center"
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{ backgroundImage: "url('/bk-bg.jpg')" }}
     >
       <div className="bg-white bg-opacity-95 rounded-lg shadow-xl p-6 w-full max-w-md">

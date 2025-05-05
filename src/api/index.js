@@ -7,6 +7,21 @@ export const API = axios.create({
     },
 });
 
+export const mockAccounts = [
+    {
+      username: "bach.buissrr@hcmut.edu.vn",
+      password: "12042004bach",
+      fullName: "BachBui"
+    },
+    {
+      username: "nguyenvana@hcmut.edu.vn",
+      password: "123456",
+      fullName: "Nguyễn Văn A"
+    }
+  ];
+  
+
+  
 // Add auth token to requests if available
 API.interceptors.request.use((config) => {
     let token = sessionStorage.getItem('token') || localStorage.getItem('token');
@@ -19,8 +34,14 @@ API.interceptors.request.use((config) => {
   export const authAPI = {
     studentLogin: async (username, password) => {
       try {
-        const response = await API.post("/auth/student/login", { username, password });
-        return response.data;
+        const user = mockAccounts.find(
+          (acc) => acc.username === username && acc.password === password
+        );
+        if (!user) {
+          throw new Error("Sai tài khoản hoặc mật khẩu");
+        }
+        const token = "fake-jwt-token";
+        return { user, token };
       } catch (err) {
         console.error("Login error:", err);
         throw err;
@@ -53,7 +74,17 @@ API.interceptors.request.use((config) => {
     }
   };
   
-
+  
+  export const forgotPassword = async (email) => {
+    try {
+      const res = await API.post("/auth/forgot-password", { email });
+      return res.data;
+    } catch (err) {
+      console.error("Forgot password error:", err);
+      throw err;
+    }
+  };
+  
 // =============== SPACE ===============
 /**
  * Get all spaces with optional filtering
